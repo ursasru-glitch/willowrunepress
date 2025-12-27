@@ -1,0 +1,7 @@
+{
+  "name": "Willow Rune Press",
+  "description": "An independent publishing studio and author co-op platform with a full CMS, booking system, and literary community features.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
