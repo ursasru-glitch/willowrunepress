@@ -24,7 +24,7 @@ export const useCMS = () => {
 const App: React.FC = () => {
   const [data, setData] = useState<CMSData>(cmsService.getData());
   const [isAdmin, setIsAdmin] = useState(false);
-  const [view, setView] = useState<'home' | 'books' | 'authors' | 'about' | 'blog' | 'shop' | 'admin' | 'contact' | 'submissions' | 'press' | 'bookings'>('home');
+  const [view, setView] = useState<'home' | 'books' | 'authors' | 'about' | 'blog' | 'shop' | 'contact' | 'submissions' | 'press' | 'bookings' | 'author' | 'admin'>('home');
 
   const updateData = (newData: CMSData) => {
     setData(newData);
