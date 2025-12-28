@@ -1,51 +1,29 @@
 import React from "react";
 
-type ButtonVariant = "primary" | "secondary";
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: "primary" | "secondary";
+};
 
-export function Button({
-  variant = "primary",
-  className = "",
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant }) {
+export const Button: React.FC<ButtonProps> = ({ variant = "primary", className = "", ...props }) => {
   const base =
     "px-6 py-2.5 rounded-full font-medium transition-all duration-300 border focus:outline-none disabled:opacity-50";
-  const variants: Record<ButtonVariant, string> = {
-    primary:
-      "bg-navy border-navy text-primary-bg hover:bg-sage hover:border-sage hover:text-navy",
-    secondary:
-      "bg-transparent border-navy text-navy hover:bg-secondary-bg hover:border-navy hover:text-navy",
-  };
-  return <button className={`${base} ${variants[variant]} ${className}`} {...props} />;
-}
+  const styles =
+    variant === "primary"
+      ? "bg-navy border-navy text-primary-bg hover:bg-sage hover:border-sage hover:text-navy"
+      : "bg-transparent border-navy/20 text-navy hover:border-sage hover:text-sage";
 
-export function Section({
-  children,
+  return <button className={`${base} ${styles} ${className}`} {...props} />;
+};
+
+export const Section: React.FC<{ className?: string; bgColor?: "primary" | "secondary"; children: React.ReactNode }> = ({
   className = "",
-  bgColor,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  bgColor?: "secondary";
-}) {
+  bgColor = "primary",
+  children,
+}) => {
   const bg = bgColor === "secondary" ? "bg-secondary-bg" : "bg-primary-bg";
-  return (
-    <section className={`${bg} px-6 md:px-12 py-16 md:py-24 ${className}`}>
-      <div className="max-w-7xl mx-auto">{children}</div>
-    </section>
-  );
-}
+  return <section className={`${bg} px-6 md:px-12 py-16 md:py-24 ${className}`}>{children}</section>;
+};
 
-export function Card({
-  children,
-  className = "",
-  ...props
-}: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
-  return (
-    <div
-      className={`bg-white/50 border border-divider-color/20 rounded-lg shadow-sm ${className}`}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-}
+export const Card: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = "", ...props }) => {
+  return <div className={`bg-white rounded-lg border border-navy/5 shadow ${className}`} {...props} />;
+};
